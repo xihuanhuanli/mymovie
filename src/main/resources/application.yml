@@ -1,6 +1,7 @@
 server:
   port: 8080
 
+#spring 数据库配置
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -8,7 +9,7 @@ spring:
     username: root
     password: "0126"
 
-
+#mybatis配置
 mybatis:
   type-aliases-package: com.cjj.myapplication.model
   mapper-locations: classpath:mapper/*.xml
