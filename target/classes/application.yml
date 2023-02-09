@@ -1,0 +1,14 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mymovie?serverTimezone=Asia/Shanghai&characterEncoding=utf-8
+    username: root
+    password: "0126"
+
+
+mybatis:
+  type-aliases-package: com.cjj.myapplication.model
+  mapper-locations: classpath:mapper/*.xml
