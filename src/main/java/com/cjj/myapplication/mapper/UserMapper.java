@@ -12,5 +12,7 @@ public interface UserMapper {
 
     List<User> selectAll();
 
+    User selectUserByNameAndPassword(User user);
+
 
 }

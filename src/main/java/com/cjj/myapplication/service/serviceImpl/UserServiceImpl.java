@@ -12,10 +12,15 @@ import java.util.List;
 
 @Service("UserService")
 public class UserServiceImpl implements UserService {
-    @Autowired
+    @Resource
     private UserMapper userMapper;
     @Override
     public List<User> selectAll() {
         return userMapper.selectAll();
+    }
+
+    @Override
+    public User selectUserByNameAndPassword(User user) {
+        return userMapper.selectUserByNameAndPassword(user);
     }
 }

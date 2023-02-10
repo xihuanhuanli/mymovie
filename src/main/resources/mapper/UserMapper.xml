@@ -4,4 +4,7 @@
     <select id="selectAll" resultType="com.cjj.myapplication.model.User">
         SELECT * FROM test
     </select>
+    <select id="selectUserByNameAndPassword" resultType="com.cjj.myapplication.model.User" >
+        SELECT * FROM user WHERE username = #{username} and password = #{password} and is_deleted = 0;
+    </select>
 </mapper>

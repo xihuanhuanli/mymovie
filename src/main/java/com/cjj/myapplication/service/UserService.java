@@ -5,5 +5,6 @@ import com.cjj.myapplication.model.User;
 import java.util.List;
 
 public interface UserService {
-    public List<User> selectAll();
+         List<User> selectAll();
+         User selectUserByNameAndPassword(User user);
 }
