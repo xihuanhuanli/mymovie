@@ -14,5 +14,9 @@ public interface UserMapper {
 
     User selectUserByNameAndPassword(User user);
 
+    User getUserInfoById(int userid);
+
+
+
 
 }

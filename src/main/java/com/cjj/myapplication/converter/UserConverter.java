@@ -14,8 +14,8 @@ public interface UserConverter {
 
     UserConverter INSTANCE = Mappers.getMapper( UserConverter.class );
 
-    User userDTOToUser(UserDTO user);
+    User UserDTOToUser(UserDTO user);
 
-    UserDTO userToUserDTO(User user);
+    UserDTO UserToUserDTO(User user);
 
 }

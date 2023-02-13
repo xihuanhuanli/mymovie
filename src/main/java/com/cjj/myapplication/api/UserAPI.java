@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
+import java.util.Map;
 
 @RequestMapping(value = "/user")
 public interface UserAPI {
@@ -18,5 +19,11 @@ public interface UserAPI {
 
     @RequestMapping(value="/login", method = RequestMethod.POST)
     ResponseData<LoginDTO> login(@RequestBody UserDTO userDTO);
+
+    @RequestMapping(value = "/getUserInfo",method = RequestMethod.POST)
+    ResponseData<UserDTO> getUserInfo(@RequestBody Map<String,String> map);
+
+    @RequestMapping(value = "/logout",method = RequestMethod.POST)
+    ResponseData<UserDTO> logout();
 
 }

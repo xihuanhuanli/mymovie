@@ -7,4 +7,5 @@ import java.util.List;
 public interface UserService {
          List<User> selectAll();
          User selectUserByNameAndPassword(User user);
+         User getUserInfoById(int userid);
 }

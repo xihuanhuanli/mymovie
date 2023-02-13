@@ -38,12 +38,15 @@
             <scope>test</scope>
         </dependency>
         <!-- qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq -->
+        <!-- 自动生成get set tostring  无参数和全参数构造方法-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.12</version>
             <scope>provided</scope>
         </dependency>
+
+        <!--converter转换工具 -->
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct-jdk8</artifactId>
@@ -61,27 +64,23 @@
             <version>1.5.2.Final</version>
         </dependency>
 
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt</artifactId>
-            <version>0.9.1</version>
-        </dependency>
+        <!--token生成-->
+                <dependency>
+                    <groupId>io.jsonwebtoken</groupId>
+                    <artifactId>jjwt</artifactId>
+                    <version>0.9.1</version>
+                </dependency>
 
 
+            </dependencies>
 
-    </dependencies>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-
-            </plugin>
-        </plugins>
-
-
-
-    </build>
-
-</project>
+        </project>

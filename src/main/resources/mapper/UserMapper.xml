@@ -7,4 +7,7 @@
     <select id="selectUserByNameAndPassword" resultType="com.cjj.myapplication.model.User" >
         SELECT * FROM user WHERE username = #{username} and password = #{password} and is_deleted = 0;
     </select>
+    <select id="getUserInfoById" resultType="com.cjj.myapplication.model.User" >
+        SELECT * FROM user WHERE id=${userid} and is_deleted = 0;
+    </select>
 </mapper>
