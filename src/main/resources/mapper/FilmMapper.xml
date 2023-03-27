@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cjj.myapplication.mapper.FilmMapper">
+    <resultMap id="FilmDTOMap" type="com.cjj.myapplication.api.dto.FilmDTO">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="film_name" jdbcType="VARCHAR" property="filmName"/>
+        <result column="initial_name" jdbcType="VARCHAR" property="initialName"/>
+        <result column="country" jdbcType="VARCHAR" property="country"/>
+        <result column="release_year" jdbcType="VARCHAR" property="releaseYear"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
+        <result column="score" jdbcType="VARCHAR" property="score"/>
+        <result column="evaluate_number" jdbcType="VARCHAR" property="evaluateNumber"/>
+        <result column="role" jdbcType="VARCHAR" property="role"/>
+        <result column="introduction" jdbcType="VARCHAR" property="introduction"/>
+        <result column="image_src" jdbcType="VARCHAR" property="imageSrc"/>
+        <result column="alias" jdbcType="VARCHAR" property="alias"/>
+        <result column="language" jdbcType="VARCHAR" property="language"/>
+        <result column="time" jdbcType="VARCHAR" property="time"/>
+        <result column="details_src" jdbcType="VARCHAR" property="detailsSrc"/>
+
+    </resultMap>
+
+    <insert id="addFilm" >
+        INSERT INTO film1 (
+            film_name,
+            initial_name,
+            country,
+            `release_year`,
+            type,
+            score,
+            evaluate_number,
+            role,
+            introduction,
+            image_src,
+            alias,
+            `language`,
+            time,
+            details_src
+        )
+        VALUES
+            (
+                #{film.film_name},
+                #{film.initial_name},
+                #{film.country},
+                #{film.release_year},
+                #{film.type},
+                #{film.score},
+                #{film.evaluate_number},
+                #{film.role},
+                #{film.introduction},
+                #{film.image_src},
+                #{film.alias},
+                #{film.language},
+                #{film.time},
+                #{film.details_src}
+            )
+    </insert>
+    <update id="deleteFilm">
+        UPDATE film1
+        SET is_deleted = 1
+        WHERE id=#{id}
+    </update>
+    <update id="updateFilm">
+        UPDATE film1
+        SET film_name=#{film.film_name},
+            initial_name=#{film.initial_name},
+            country=#{film.country},
+            `release_year`=#{film.release_year},
+            type=#{film.type},
+            score=#{film.score},
+            evaluate_number=#{film.evaluate_number},
+            role=#{film.role},
+            introduction=#{film.introduction},
+            image_src=#{film.image_src},
+            alias=#{film.alias},
+            `language`=#{film.language},
+            time=#{film.time},
+            details_src=#{film.details_src}
+        WHERE id=#{film.id}
+    </update>
+    <select id="selectAll" resultType="com.cjj.myapplication.model.Film">
+        SELECT * FROM film1
+        WHERE is_deleted = 0
+    </select>
+    <select id="selectPage" resultMap="FilmDTOMap">
+        SELECT *
+        FROM film1
+        WHERE is_deleted = 0
+    </select>
+</mapper>

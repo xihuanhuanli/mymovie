@@ -18,5 +18,11 @@ logging:
   level:
     com.cjj.myapplication: debug
 
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
 
 salt: xLJPk(MY!e)uOU%X
