@@ -86,5 +86,8 @@
         SELECT *
         FROM film1
         WHERE is_deleted = 0
+        <if test="search!=null and search!=''">
+            AND film_name like   concat('%','${search}','%')
+        </if>
     </select>
 </mapper>

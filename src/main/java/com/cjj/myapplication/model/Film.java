@@ -17,7 +17,7 @@ public class Film {
     private String release_year;
     private String type;
     private String score;
-    private Integer evaluate_number;
+    private String evaluate_number;
     private String role;
     private String introduction;
     private String image_src;

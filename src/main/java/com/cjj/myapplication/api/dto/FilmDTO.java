@@ -2,8 +2,6 @@ package com.cjj.myapplication.api.dto;
 
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 @Data
 public class FilmDTO {
     private Integer id;
@@ -13,7 +11,7 @@ public class FilmDTO {
     private String releaseYear;
     private String type;
     private String score;
-    private Integer evaluateNumber;
+    private String evaluateNumber;
     private String role;
     private String introduction;
     private String imageSrc;

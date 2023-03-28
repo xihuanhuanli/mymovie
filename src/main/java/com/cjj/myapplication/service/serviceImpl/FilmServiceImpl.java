@@ -35,7 +35,8 @@ public class FilmServiceImpl implements FilmService {
         int pageNum = pageRequest.getPageNum();
         int pageSize = pageRequest.getPageSize();
         PageHelper.startPage(pageNum, pageSize);
-        List<Film> filmList = filmMapper.selectPage();
+        String  search=pageRequest.getSearch();
+        List<Film> filmList=filmMapper.selectPage(search);
         return new PageInfo<Film>(filmList);
     }
 

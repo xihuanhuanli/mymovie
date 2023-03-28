@@ -10,7 +10,7 @@ import java.util.List;
 public interface FilmMapper {
     List<Film> selectAll();
 
-    List<Film> selectPage();
+    List<Film> selectPage(@Param("search") String search);
 
     void addFilm(@Param("film") Film film);
 
