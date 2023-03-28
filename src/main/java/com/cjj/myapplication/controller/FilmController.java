@@ -63,9 +63,4 @@ public class FilmController implements FilmAPI {
         ResponseData responseData=new ResponseData(0,"success");
         return responseData;
     }
-
-    @Override
-    public ResponseData<?> selectALLwithPage(Integer pageNum, Integer pageSize, String search) {
-        return null;
-    }
 }

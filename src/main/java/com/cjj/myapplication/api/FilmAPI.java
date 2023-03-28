@@ -14,25 +14,40 @@ import java.util.List;
 
 @RequestMapping(value = "/film")
 public interface FilmAPI {
+    /**
+     * 查询列表（已停用） 改用分页查询
+     */
     @RequestMapping(value = "/selectALL",method = RequestMethod.POST)
     ResponseData<List<FilmDTO>> selectAll();
 
+    /**
+     * 分页查询列表
+     */
     @RequestMapping(value = "/selectALLPage",method = RequestMethod.POST)
     ResponseData<PageResult> selectAllPage(@RequestBody PageRequest pageQuery);
 
+    /**
+     * 新增电影
+     * @param filmDTO
+     * @return
+     */
     @RequestMapping(value = "/addFilm",method = RequestMethod.POST)
     ResponseData addFilm(@RequestBody FilmDTO filmDTO);
 
+    /**
+     * 逻辑删除电影
+     * @param filmDTO
+     * @return
+     */
     @RequestMapping(value = "/deleteFilm",method = RequestMethod.POST)
     ResponseData deleteFilm(@RequestBody FilmDTO filmDTO);
 
+    /**
+     * 更新电影信息by  id
+     * @param filmDTO
+     * @return
+     */
     @RequestMapping(value = "/updateFilm",method = RequestMethod.POST)
     ResponseData updateFilm(@RequestBody FilmDTO filmDTO);
-
-    @RequestMapping(value = "/selectALLwithPage",method = RequestMethod.POST)
-         ResponseData<?> selectALLwithPage(@RequestParam(defaultValue = "1") Integer pageNum,
-                                    @RequestParam(defaultValue = "10") Integer pageSize,
-                                    @RequestParam(defaultValue = "") String search);
-
 
 }

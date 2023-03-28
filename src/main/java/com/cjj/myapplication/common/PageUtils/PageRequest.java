@@ -16,5 +16,8 @@ public class PageRequest {
      */
     private int pageSize;
 
+    /**
+     * 查询输入框里的数据
+     */
     private String search;
 }

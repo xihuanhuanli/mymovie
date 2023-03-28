@@ -1,13 +1,54 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.cjj.myapplication.mapper.UserMapper">
-    <select id="selectAll" resultType="com.cjj.myapplication.model.User">
-        SELECT * FROM user
-    </select>
+    <resultMap id="UserDTOMap" type="com.cjj.myapplication.api.dto.UserDTO">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+        <result column="role" jdbcType="VARCHAR" property="role"/>
+    </resultMap>
+    <insert id="addUser">
+        INSERT INTO user (
+            username,
+            password,
+            avatar,
+            role
+        )
+        VALUES
+            (
+                #{user.username},
+                #{user.password},
+                #{user.avatar},
+                #{user.role}
+            )
+    </insert>
+    <update id="updateUser">
+        UPDATE user
+        SET username=#{user.username},
+            password=#{user.password},
+            avatar=#{user.avatar},
+            role=#{user.role}
+        WHERE id=#{user.id}
+    </update>
+    <update id="deleteUser">
+        UPDATE user
+        SET is_deleted = 1
+        WHERE id=#{id}
+    </update>
+
     <select id="selectUserByNameAndPassword" resultType="com.cjj.myapplication.model.User" >
         SELECT * FROM user WHERE username = #{username} and password = #{password} and is_deleted = 0;
     </select>
     <select id="getUserInfoById" resultType="com.cjj.myapplication.model.User" >
         SELECT * FROM user WHERE id=${userid} and is_deleted = 0;
+    </select>
+    <select id="selectUserPage" resultMap="UserDTOMap">
+        SELECT *
+        FROM user
+        WHERE is_deleted = 0
+        <if test="search!=null and search!=''">
+            AND username like   concat('%','${search}','%')
+        </if>
     </select>
 </mapper>

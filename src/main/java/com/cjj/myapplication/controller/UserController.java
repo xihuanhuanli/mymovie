@@ -3,6 +3,8 @@ package com.cjj.myapplication.controller;
 import com.cjj.myapplication.api.UserAPI;
 import com.cjj.myapplication.api.dto.LoginDTO;
 import com.cjj.myapplication.api.dto.UserDTO;
+import com.cjj.myapplication.common.PageUtils.PageRequest;
+import com.cjj.myapplication.common.PageUtils.PageResult;
 import com.cjj.myapplication.common.ResponseData;
 import com.cjj.myapplication.converter.UserConverter;
 import com.cjj.myapplication.model.User;
@@ -29,10 +31,37 @@ public class UserController implements UserAPI {
     UserConverter converter = UserConverter.INSTANCE;
     @Resource
     private UserService userService =new UserServiceImpl();
+
+
     @Override
-    public List<User> selectAll() {
-        List<User> list=userService.selectAll();
-        return list;
+    public ResponseData<PageResult> selectAllPageUser(PageRequest pageQuery) {
+        PageResult pageResult =userService.findUserPage(pageQuery);
+        ResponseData responseData=new ResponseData<>(0,"success",pageResult);
+        return responseData;
+    }
+
+    @Override
+    public ResponseData addUser(UserDTO userDTO) {
+        User user=converter.UserDTOToUser(userDTO);
+        userService.addUser(user);
+        ResponseData responseData=new ResponseData<>(0,"success");
+        return responseData;
+    }
+
+    @Override
+    public ResponseData deleteUser(UserDTO userDTO) {
+        User user=converter.UserDTOToUser(userDTO);
+        userService.deleteUser(user.getId());
+        ResponseData responseData=new ResponseData<>(0,"success");
+        return responseData;
+    }
+
+    @Override
+    public ResponseData updateUser(UserDTO userDTO) {
+        User user=converter.UserDTOToUser(userDTO);
+        userService.updateUser(user);
+        ResponseData responseData=new ResponseData(0,"success");
+        return responseData;
     }
 
     @Override

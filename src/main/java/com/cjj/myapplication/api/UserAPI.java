@@ -2,20 +2,30 @@ package com.cjj.myapplication.api;
 
 import com.cjj.myapplication.api.dto.LoginDTO;
 import com.cjj.myapplication.api.dto.UserDTO;
+import com.cjj.myapplication.common.PageUtils.PageRequest;
+import com.cjj.myapplication.common.PageUtils.PageResult;
 import com.cjj.myapplication.common.ResponseData;
-import com.cjj.myapplication.model.User;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.List;
+
 import java.util.Map;
 
 @RequestMapping(value = "/user")
 public interface UserAPI {
 
-    @RequestMapping(value = "/selectALL",method = RequestMethod.POST)
-    List<User> selectAll();
+    @RequestMapping(value = "/selectALLPage",method = RequestMethod.POST)
+    ResponseData<PageResult> selectAllPageUser(@RequestBody PageRequest pageQuery);
+
+    @RequestMapping(value = "/addUser",method = RequestMethod.POST)
+    ResponseData addUser(@RequestBody UserDTO userDTO);
+
+    @RequestMapping(value = "/deleteUser",method = RequestMethod.POST)
+    ResponseData deleteUser(@RequestBody UserDTO userDTO);
+
+    @RequestMapping(value = "/updateUser",method = RequestMethod.POST)
+    ResponseData updateUser(@RequestBody UserDTO userDTO);
 
     @RequestMapping(value="/login", method = RequestMethod.POST)
     ResponseData<LoginDTO> login(@RequestBody UserDTO userDTO);
@@ -25,5 +35,7 @@ public interface UserAPI {
 
     @RequestMapping(value = "/logout",method = RequestMethod.POST)
     ResponseData<UserDTO> logout();
+
+
 
 }
