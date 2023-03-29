@@ -28,4 +28,5 @@ public interface FilmService {
     void updateFilm(Film film);
 
 
+    Film selectFilmByfilmName(String filmname);
 }

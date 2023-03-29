@@ -43,6 +43,13 @@ public class FilmController implements FilmAPI {
     @Override
     public ResponseData addFilm(FilmDTO filmDTO) {
         Film film=filmConverter.FilmDTOToFilm(filmDTO);
+        if(film.getFilm_name()!=null&&film.getFilm_name()!=""){
+            Film filmtest=selectFilmByfilmName(film.getFilm_name());
+            if(filmtest!=null){
+                ResponseData responseData=new ResponseData<>(1,"filmExist!");
+                return responseData;
+            }
+        }
         filmService.addFilm(film);
         ResponseData responseData=new ResponseData<>(0,"success");
         return responseData;
@@ -62,5 +69,10 @@ public class FilmController implements FilmAPI {
         filmService.updateFilm(film);
         ResponseData responseData=new ResponseData(0,"success");
         return responseData;
+    }
+
+    public Film selectFilmByfilmName(String filmname){
+        Film film1=filmService.selectFilmByfilmName(filmname);
+        return film1;
     }
 }

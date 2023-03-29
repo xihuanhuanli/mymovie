@@ -90,4 +90,10 @@
             AND film_name like   concat('%','${search}','%')
         </if>
     </select>
+    <select id="selectFilmByfilmName" resultType="com.cjj.myapplication.model.Film">
+        SELECT *
+        FROM film1
+        WHERE is_deleted = 0
+        AND film_name =#{filmname}
+    </select>
 </mapper>

@@ -55,4 +55,10 @@ public class FilmServiceImpl implements FilmService {
     public void updateFilm(Film film) {
         filmMapper.updateFilm(film);
     }
+
+    @Override
+    public Film selectFilmByfilmName(String filmname) {
+        Film film=filmMapper.selectFilmByfilmName(filmname);
+        return film;
+    }
 }

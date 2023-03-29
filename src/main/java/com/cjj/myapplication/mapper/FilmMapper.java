@@ -17,4 +17,6 @@ public interface FilmMapper {
     void deleteFilm(@Param("id") int id);
 
     void updateFilm(@Param("film") Film film);
+
+    Film selectFilmByfilmName(@Param("filmname")String filmname);
 }
