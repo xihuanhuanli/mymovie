@@ -1,6 +1,7 @@
 package com.cjj.myapplication.api;
 
 import com.cjj.myapplication.api.dto.FilmDTO;
+import com.cjj.myapplication.api.dto.ShowFilmDTO;
 import com.cjj.myapplication.common.PageUtils.PageRequest;
 import com.cjj.myapplication.common.PageUtils.PageResult;
 import com.cjj.myapplication.common.PageUtils.PageUtils;
@@ -49,5 +50,19 @@ public interface FilmAPI {
      */
     @RequestMapping(value = "/updateFilm",method = RequestMethod.POST)
     ResponseData updateFilm(@RequestBody FilmDTO filmDTO);
+
+    @RequestMapping(value = "/selectShowFilm",method = RequestMethod.POST)
+    ResponseData selectShowFilm();
+
+    @RequestMapping(value = "/selectShowFilmList",method = RequestMethod.POST)
+    ResponseData<PageResult> selectShowFilmList(@RequestBody PageRequest pageQuery);
+
+    @RequestMapping(value = "/deleteShowFilm",method = RequestMethod.POST)
+    ResponseData deleteShowFilm(@RequestBody ShowFilmDTO showFilmDTO);
+    @RequestMapping(value = "/updateShowFilm",method = RequestMethod.POST)
+    ResponseData updateShowFilm(@RequestBody ShowFilmDTO showFilmDTO);
+
+    @RequestMapping(value = "/addShowFilm",method = RequestMethod.POST)
+    ResponseData addShowFilm(@RequestBody ShowFilmDTO showFilmDTO);
 
 }

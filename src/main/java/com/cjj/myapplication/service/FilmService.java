@@ -7,6 +7,7 @@ import com.cjj.myapplication.common.PageUtils.PageResult;
 import com.cjj.myapplication.model.Film;
 
 import java.util.List;
+import java.util.Map;
 
 public interface FilmService {
     List<Film> selectAll();
@@ -29,4 +30,18 @@ public interface FilmService {
 
 
     Film selectFilmByfilmName(String filmname);
+
+    List<Map> selectShowFilm();
+
+    PageResult findShowFilmPage(PageRequest pageQuery);
+
+    void deleteShowFilm(int id);
+
+    void updateShowFilm(int id, int showFilmId);
+
+    void addShowFilm(int showFilmId);
+
+    Map selectShowFilmByID(int id);
+
+    Film selectFilmByfilmID(int id);
 }

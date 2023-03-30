@@ -55,6 +55,15 @@
                 #{film.details_src}
             )
     </insert>
+    <insert id="addShowFilm">
+        INSERT INTO `show_film` (
+            show_film_id
+        )
+        VALUES
+            (
+                #{showFilmId}
+            )
+    </insert>
     <update id="deleteFilm">
         UPDATE film1
         SET is_deleted = 1
@@ -78,6 +87,16 @@
             details_src=#{film.details_src}
         WHERE id=#{film.id}
     </update>
+    <update id="updateShowFilm">
+        UPDATE `show_film`
+        SET  show_film_id=#{showFilmId}
+        WHERE id=#{id}
+    </update>
+    <update id="deleteShowFilm">
+        UPDATE `show_film`
+        SET  is_deleted=1
+        WHERE id=#{id}
+    </update>
     <select id="selectAll" resultType="com.cjj.myapplication.model.Film">
         SELECT * FROM film1
         WHERE is_deleted = 0
@@ -95,5 +114,35 @@
         FROM film1
         WHERE is_deleted = 0
         AND film_name =#{filmname}
+    </select>
+    <select id="selectShowFilm" resultType="java.util.Map">
+        SELECT *
+        FROM film1
+        WHERE is_deleted = 0
+          AND id IN (
+            SELECT c.show_film_id
+            FROM `show_film` c
+            WHERE c.is_deleted = 0
+        )
+    </select>
+    <select id="selectShowFilmPage" resultType="java.util.Map">
+        SELECT c.id,c.show_film_id,b.film_name
+        FROM `show_film` c
+        LEFT JOIN film1 b on b.id=c.show_film_id AND b.is_deleted = 0
+        WHERE c.is_deleted = 0 and b.film_name is not null
+        <if test="search!=null and search!=''">
+            AND c.show_film_id like   concat('%','${search}','%')
+        </if>
+    </select>
+    <select id="selectShowFilmByID" resultType="java.util.Map">
+        SELECT *
+        FROM `show_film`
+        WHERE is_deleted = 0
+          AND show_film_id=#{id}
+    </select>
+    <select id="selectFilmByfilmID" resultType="com.cjj.myapplication.model.Film">
+        SELECT *
+        FROM film1
+        WHERE is_deleted = 0 AND id=#{id}
     </select>
 </mapper>

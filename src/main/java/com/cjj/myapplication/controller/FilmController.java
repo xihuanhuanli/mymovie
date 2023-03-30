@@ -2,6 +2,7 @@ package com.cjj.myapplication.controller;
 
 import com.cjj.myapplication.api.FilmAPI;
 import com.cjj.myapplication.api.dto.FilmDTO;
+import com.cjj.myapplication.api.dto.ShowFilmDTO;
 import com.cjj.myapplication.common.PageUtils.PageRequest;
 import com.cjj.myapplication.common.PageUtils.PageResult;
 import com.cjj.myapplication.common.PageUtils.PageUtils;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @Slf4j
@@ -38,6 +40,47 @@ public class FilmController implements FilmAPI {
         ResponseData responseData=new ResponseData<>(0,"success",pageResult);
         return responseData;
     }
+    @Override
+    public ResponseData<PageResult> selectShowFilmList(PageRequest pageQuery) {
+        PageResult pageResult =filmService.findShowFilmPage(pageQuery);
+        ResponseData responseData=new ResponseData<>(0,"success",pageResult);
+        return responseData;
+    }
+
+    @Override
+    public ResponseData deleteShowFilm(ShowFilmDTO showFilmDTO) {
+        filmService.deleteShowFilm(showFilmDTO.getId());
+        ResponseData responseData=new ResponseData<>(0,"success");
+        return responseData;
+    }
+
+    @Override
+    public ResponseData updateShowFilm(ShowFilmDTO showFilmDTO) {
+        if(selectFilmByfilmID(showFilmDTO.getShow_film_id())==null){
+            ResponseData responseData=new ResponseData<>(2,"filmNOTExist!");
+            return responseData;
+        }
+        filmService.updateShowFilm(showFilmDTO.getId(),showFilmDTO.getShow_film_id());
+        ResponseData responseData=new ResponseData(0,"success");
+        return responseData;
+    }
+
+    @Override
+    public ResponseData addShowFilm(ShowFilmDTO showFilmDTO) {
+        if(selectFilmByfilmID(showFilmDTO.getShow_film_id())==null){
+            ResponseData responseData=new ResponseData<>(2,"filmNOTExist!");
+            return responseData;
+        }
+        Map map=selectShowFilmByID(showFilmDTO.getShow_film_id());
+        if(map!=null&&map.size()!=0){
+            ResponseData responseData=new ResponseData<>(1,"showfilmExist!");
+            return responseData;
+        }
+        filmService.addShowFilm(showFilmDTO.getShow_film_id());
+        ResponseData responseData=new ResponseData<>(0,"success");
+        return responseData;
+    }
+
 
 
     @Override
@@ -71,8 +114,30 @@ public class FilmController implements FilmAPI {
         return responseData;
     }
 
+    @Override
+    public ResponseData selectShowFilm() {
+        List<Map> map=filmService.selectShowFilm();
+        for(Map<String, Object> map1 : map){
+            String s=(String) map1.get("image_src");
+            s="https://images.weserv.nl/?url="+s;
+            map1.put("image_src",s);
+        }
+        ResponseData responseData=new ResponseData(0,"success",map);
+        return responseData;
+    }
+
+
+
     public Film selectFilmByfilmName(String filmname){
         Film film1=filmService.selectFilmByfilmName(filmname);
         return film1;
+    }
+    public Film selectFilmByfilmID(int id){
+        Film film1=filmService.selectFilmByfilmID(id);
+        return film1;
+    }
+    public Map selectShowFilmByID(int id){
+        Map map=filmService.selectShowFilmByID(id);
+        return map;
     }
 }

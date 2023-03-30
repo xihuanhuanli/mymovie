@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class FilmServiceImpl implements FilmService {
@@ -28,6 +29,47 @@ public class FilmServiceImpl implements FilmService {
     public PageResult findPage(PageRequest pageRequest) {
         return PageUtils.getPageResult(pageRequest, getPageInfo(pageRequest));
     }
+    @Override
+    public PageResult findShowFilmPage(PageRequest pageRequest) {
+        return PageUtils.getPageResult(pageRequest, getShowFilmPageInfo(pageRequest));
+    }
+
+    @Override
+    public void deleteShowFilm(int id) {
+        filmMapper.deleteShowFilm(id);
+    }
+
+    @Override
+    public void updateShowFilm(int id, int showFilmId) {
+        filmMapper.updateShowFilm(id,showFilmId);
+    }
+
+    @Override
+    public void addShowFilm(int showFilmId) {
+        filmMapper.addShowFilm(showFilmId);
+    }
+
+    @Override
+    public Map selectShowFilmByID(int id) {
+        Map map=filmMapper.selectShowFilmByID(id);
+        return map;
+    }
+
+    @Override
+    public Film selectFilmByfilmID(int id) {
+        Film film=filmMapper.selectFilmByfilmID(id);
+        return film;
+    }
+
+    private PageInfo<?> getShowFilmPageInfo(PageRequest pageRequest) {
+        int pageNum = pageRequest.getPageNum();
+        int pageSize = pageRequest.getPageSize();
+        PageHelper.startPage(pageNum, pageSize);
+        String  search=pageRequest.getSearch();
+        List<Map> list=filmMapper.selectShowFilmPage(search);
+        return new PageInfo<>(list);
+    }
+
     /**
      * 调用分页插件完成分页
      */
@@ -61,4 +103,12 @@ public class FilmServiceImpl implements FilmService {
         Film film=filmMapper.selectFilmByfilmName(filmname);
         return film;
     }
+
+    @Override
+    public List<Map> selectShowFilm() {
+        List<Map> map=filmMapper.selectShowFilm();
+        return map;
+    }
+
+
 }
