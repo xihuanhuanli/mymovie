@@ -51,4 +51,10 @@
             AND username like   concat('%','${search}','%')
         </if>
     </select>
+    <select id="selectUserByUserName" resultType="com.cjj.myapplication.model.User">
+        SELECT *
+        FROM user
+        WHERE is_deleted = 0
+        AND username=#{username}
+    </select>
 </mapper>

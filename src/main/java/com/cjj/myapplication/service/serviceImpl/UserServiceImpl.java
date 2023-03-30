@@ -50,6 +50,12 @@ public class UserServiceImpl implements UserService {
         userMapper.updateUser(user);
     }
 
+    @Override
+    public User selectUserByUserName(String username) {
+        User user=userMapper.selectUserByUserName(username);
+        return user;
+    }
+
     private PageInfo<User> getPageInfo(PageRequest pageRequest) {
         int pageNum = pageRequest.getPageNum();
         int pageSize = pageRequest.getPageSize();

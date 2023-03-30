@@ -26,4 +26,6 @@ public interface UserService {
          void deleteUser(int id);
 
          void updateUser(User user);
+
+         User selectUserByUserName(String username);
 }

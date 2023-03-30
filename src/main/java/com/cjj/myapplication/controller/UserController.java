@@ -43,9 +43,21 @@ public class UserController implements UserAPI {
     @Override
     public ResponseData addUser(UserDTO userDTO) {
         User user=converter.UserDTOToUser(userDTO);
+        if(user.getUsername()!=null&&user.getUsername()!=""){
+            User usertest=selectUserByUserName(user.getUsername());
+            if(usertest!=null){
+                ResponseData responseData=new ResponseData<>(1,"UserExist!");
+                return responseData;
+            }
+        }
         userService.addUser(user);
         ResponseData responseData=new ResponseData<>(0,"success");
         return responseData;
+    }
+
+    private User selectUserByUserName(String username) {
+        User user=userService.selectUserByUserName(username);
+        return user;
     }
 
     @Override

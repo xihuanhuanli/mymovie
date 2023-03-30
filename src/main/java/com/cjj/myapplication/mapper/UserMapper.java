@@ -24,4 +24,6 @@ public interface UserMapper {
     void deleteUser(@Param("id") int id);
 
     void updateUser(@Param("user") User user);
+
+    User selectUserByUserName(@Param("username")String username);
 }
