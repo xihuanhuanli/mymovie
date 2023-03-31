@@ -81,6 +81,20 @@ public class FilmController implements FilmAPI {
         return responseData;
     }
 
+    @Override
+    public ResponseData selectfilmByfilmID(FilmDTO filmdto) {
+        Film film1=filmService.selectFilmByfilmID(filmdto.getId());
+        if(film1==null){
+            ResponseData responseData=new ResponseData<>(1,"filmNOTExist!");
+            return responseData;
+        }
+        String s=film1.getImage_src();
+        s="https://images.weserv.nl/?url="+s;
+        film1.setImage_src(s);
+        FilmDTO filmDTO=filmConverter.FilmToFilmDTO(film1);
+        ResponseData responseData=new ResponseData<>(0,"success",filmDTO);
+        return responseData;
+    }
 
 
     @Override

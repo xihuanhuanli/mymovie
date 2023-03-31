@@ -15,7 +15,7 @@ import java.util.Map;
 @RequestMapping(value = "/user")
 public interface UserAPI {
 
-    @RequestMapping(value = "/selectALLPage",method = RequestMethod.POST)
+    @RequestMapping(value = "/selectALLPageUser",method = RequestMethod.POST)
     ResponseData<PageResult> selectAllPageUser(@RequestBody PageRequest pageQuery);
 
     @RequestMapping(value = "/addUser",method = RequestMethod.POST)

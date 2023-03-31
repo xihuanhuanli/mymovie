@@ -24,7 +24,7 @@ public interface FilmAPI {
     /**
      * 分页查询列表
      */
-    @RequestMapping(value = "/selectALLPage",method = RequestMethod.POST)
+    @RequestMapping(value = "/selectALLPageFilm",method = RequestMethod.POST)
     ResponseData<PageResult> selectAllPage(@RequestBody PageRequest pageQuery);
 
     /**
@@ -64,5 +64,8 @@ public interface FilmAPI {
 
     @RequestMapping(value = "/addShowFilm",method = RequestMethod.POST)
     ResponseData addShowFilm(@RequestBody ShowFilmDTO showFilmDTO);
+
+    @RequestMapping(value = "/selectFilmByfilmID",method = RequestMethod.POST)
+    ResponseData selectfilmByfilmID(@RequestBody FilmDTO filmDTO);
 
 }
