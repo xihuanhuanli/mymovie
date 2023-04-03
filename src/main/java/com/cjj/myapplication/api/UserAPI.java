@@ -2,6 +2,7 @@ package com.cjj.myapplication.api;
 
 import com.cjj.myapplication.api.dto.LoginDTO;
 import com.cjj.myapplication.api.dto.UserDTO;
+import com.cjj.myapplication.api.dto.WeiXinCheckUrl;
 import com.cjj.myapplication.common.PageUtils.PageRequest;
 import com.cjj.myapplication.common.PageUtils.PageResult;
 import com.cjj.myapplication.common.ResponseData;
@@ -35,6 +36,10 @@ public interface UserAPI {
 
     @RequestMapping(value = "/logout",method = RequestMethod.POST)
     ResponseData<UserDTO> logout();
+    @RequestMapping(value = "/checkUrl",method = RequestMethod.GET)
+     String checkUrl( WeiXinCheckUrl weiXinCheckUrl);
+    @RequestMapping(value = "/getUrl",method = RequestMethod.GET)
+    ResponseData getUrl();
 
 
 

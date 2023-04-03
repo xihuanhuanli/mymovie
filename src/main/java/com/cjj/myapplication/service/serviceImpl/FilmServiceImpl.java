@@ -1,5 +1,6 @@
 package com.cjj.myapplication.service.serviceImpl;
 
+import com.cjj.myapplication.api.dto.FilmDTO;
 import com.cjj.myapplication.common.PageUtils.PageRequest;
 import com.cjj.myapplication.common.PageUtils.PageResult;
 import com.cjj.myapplication.common.PageUtils.PageUtils;
@@ -73,13 +74,18 @@ public class FilmServiceImpl implements FilmService {
     /**
      * 调用分页插件完成分页
      */
-    private PageInfo<Film> getPageInfo(PageRequest pageRequest) {
+    private PageInfo<FilmDTO> getPageInfo(PageRequest pageRequest) {
         int pageNum = pageRequest.getPageNum();
         int pageSize = pageRequest.getPageSize();
         PageHelper.startPage(pageNum, pageSize);
         String  search=pageRequest.getSearch();
-        List<Film> filmList=filmMapper.selectPage(search);
-        return new PageInfo<Film>(filmList);
+        List<FilmDTO> filmList=filmMapper.selectPage(search);
+        for(FilmDTO film : filmList){
+            String s=film.getImageSrc();
+            s="https://images.weserv.nl/?url="+s;
+            film.setImageSrc(s);
+        }
+        return new PageInfo<FilmDTO>(filmList);
     }
 
 

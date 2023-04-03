@@ -12,7 +12,7 @@ import java.util.Map;
 public interface FilmMapper {
     List<Film> selectAll();
 
-    List<Film> selectPage(@Param("search") String search);
+    List<FilmDTO> selectPage(@Param("search") String search);
 
     void addFilm(@Param("film") Film film);
 
