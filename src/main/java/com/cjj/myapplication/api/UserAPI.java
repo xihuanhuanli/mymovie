@@ -36,11 +36,5 @@ public interface UserAPI {
 
     @RequestMapping(value = "/logout",method = RequestMethod.POST)
     ResponseData<UserDTO> logout();
-    @RequestMapping(value = "/checkUrl",method = RequestMethod.GET)
-     String checkUrl( WeiXinCheckUrl weiXinCheckUrl);
-    @RequestMapping(value = "/getUrl",method = RequestMethod.GET)
-    ResponseData getUrl();
-
-
 
 }

@@ -28,4 +28,6 @@ public interface UserService {
          void updateUser(User user);
 
          User selectUserByUserName(String username);
+
+         User getUserInfoByWechatId(String openId);
 }

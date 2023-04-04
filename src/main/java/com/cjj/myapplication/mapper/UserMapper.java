@@ -26,4 +26,6 @@ public interface UserMapper {
     void updateUser(@Param("user") User user);
 
     User selectUserByUserName(@Param("username")String username);
+
+    User getUserInfoByWechatId(@Param("openId")String openId);
 }

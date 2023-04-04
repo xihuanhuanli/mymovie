@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class User {
     private int id;
+    private String wechatid;
     private String username;
     private String password;
     private String email;

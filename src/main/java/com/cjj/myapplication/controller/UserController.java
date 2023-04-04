@@ -118,34 +118,6 @@ public class UserController implements UserAPI {
         return new ResponseData<>(200, "success", null);
     }
 
-    @Override
-    public String checkUrl(WeiXinCheckUrl weiXinCheckUrl) {
-            //与申请测试号网站填写的token对应
-            String token = "cjj";
-            List<String> paramList = new ArrayList<>();
-            paramList.add(weiXinCheckUrl.getNonce());
-            paramList.add(weiXinCheckUrl.getTimestamp());
-            paramList.add(token);
-            //按字节排序
-            Collections.sort(paramList);
-            //按顺序拼接字符串
-            StringBuilder stringBuilder = new StringBuilder();
-            paramList.forEach(stringBuilder::append);
-            //sha1加密
-            String encode = SHA1.encode(stringBuilder.toString());
-            System.out.println("微信消息发过来了：" + weiXinCheckUrl.getEchostr());
-            if (encode.equals(weiXinCheckUrl.getSignature())) {
-                return weiXinCheckUrl.getEchostr();
-            } else {
-                return "";
-            }
-    }
-
-    @Override
-    public ResponseData getUrl() {
-        wechatDTO wechatDTO=new wechatDTO("wx7496307a795a17e3","http://45e70d6d.r11.cpolar.top");
-        return new ResponseData<>(200, "success", wechatDTO);
-    }
 
 
 }

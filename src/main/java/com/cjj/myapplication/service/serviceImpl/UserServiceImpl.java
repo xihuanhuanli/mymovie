@@ -56,6 +56,12 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
+    @Override
+    public User getUserInfoByWechatId(String openId) {
+
+        return userMapper.getUserInfoByWechatId(openId);
+    }
+
     private PageInfo<User> getPageInfo(PageRequest pageRequest) {
         int pageNum = pageRequest.getPageNum();
         int pageSize = pageRequest.getPageSize();

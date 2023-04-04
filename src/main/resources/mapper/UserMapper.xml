@@ -3,6 +3,7 @@
 <mapper namespace="com.cjj.myapplication.mapper.UserMapper">
     <resultMap id="UserDTOMap" type="com.cjj.myapplication.api.dto.UserDTO">
         <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="wechatid" jdbcType="VARCHAR" property="wechatid"/>
         <result column="username" jdbcType="VARCHAR" property="username"/>
         <result column="password" jdbcType="VARCHAR" property="password"/>
         <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
@@ -10,6 +11,7 @@
     </resultMap>
     <insert id="addUser">
         INSERT INTO user (
+            wechatid,
             username,
             password,
             avatar,
@@ -17,6 +19,7 @@
         )
         VALUES
             (
+                #{user.wechatid},
                 #{user.username},
                 #{user.password},
                 #{user.avatar},
@@ -56,5 +59,8 @@
         FROM user
         WHERE is_deleted = 0
         AND username=#{username}
+    </select>
+    <select id="getUserInfoByWechatId" resultType="com.cjj.myapplication.model.User">
+        SELECT * FROM user WHERE wechatid=#{openId} and is_deleted = 0;
     </select>
 </mapper>
