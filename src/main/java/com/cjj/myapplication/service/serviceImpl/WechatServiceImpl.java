@@ -104,7 +104,7 @@ public class WechatServiceImpl implements WechatService {
         URI uri = builder.build().encode().toUri();
 
         String resp = getRestTemplate().getForObject(uri, String.class);
-        logger.error("getAccessToken resp = "+resp);
+        logger.info("getAccessToken resp = "+resp);
         if(resp.contains("openid")){
             JSONObject jsonObject = JSONObject.parseObject(resp);
             String access_token = jsonObject.getString("access_token");
@@ -135,7 +135,7 @@ public class WechatServiceImpl implements WechatService {
         URI uri = builder.build().encode().toUri();
 
         String resp = getRestTemplate().getForObject(uri, String.class);
-        logger.error("getUserInfo resp = "+resp);
+        logger.info("getUserInfo resp = "+resp);
         if(resp.contains("errcode")){
             logger.error("获取用户信息错误，msg = "+resp);
             return null;
