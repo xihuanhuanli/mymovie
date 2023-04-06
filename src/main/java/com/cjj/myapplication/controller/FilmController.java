@@ -123,6 +123,8 @@ public class FilmController implements FilmAPI {
     @Override
     public ResponseData updateFilm(FilmDTO filmDTO) {
         Film film=filmConverter.FilmDTOToFilm(filmDTO);
+        String s=film.getImage_src().substring(30);
+        film.setImage_src(s);
         filmService.updateFilm(film);
         ResponseData responseData=new ResponseData(0,"success");
         return responseData;
