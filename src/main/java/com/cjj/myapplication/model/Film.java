@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -25,6 +26,7 @@ public class Film {
     private String language;
     private String time;
     private String details_src;
+    private BigDecimal price;
     private LocalDateTime createDate;
     private int createBy;
     private LocalDateTime updateDate;

@@ -2,6 +2,8 @@ package com.cjj.myapplication.api.dto;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 public class FilmDTO {
     private Integer id;
@@ -19,4 +21,5 @@ public class FilmDTO {
     private String language;
     private String time;
     private String detailsSrc;
+    private BigDecimal price;
 }

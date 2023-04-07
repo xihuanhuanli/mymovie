@@ -17,6 +17,7 @@
         <result column="language" jdbcType="VARCHAR" property="language"/>
         <result column="time" jdbcType="VARCHAR" property="time"/>
         <result column="details_src" jdbcType="VARCHAR" property="detailsSrc"/>
+        <result column="price" jdbcType="DECIMAL" property="price"/>
 
     </resultMap>
 
@@ -35,7 +36,8 @@
             alias,
             `language`,
             time,
-            details_src
+            details_src,
+            price
         )
         VALUES
             (
@@ -53,6 +55,7 @@
                 #{film.language},
                 #{film.time},
                 #{film.details_src}
+                #{film.price}
             )
     </insert>
     <insert id="addShowFilm">
@@ -84,7 +87,8 @@
             alias=#{film.alias},
             `language`=#{film.language},
             time=#{film.time},
-            details_src=#{film.details_src}
+            details_src=#{film.details_src},
+            price=#{film.price}
         WHERE id=#{film.id}
     </update>
     <update id="updateShowFilm">

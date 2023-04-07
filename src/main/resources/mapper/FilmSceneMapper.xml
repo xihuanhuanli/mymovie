@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cjj.myapplication.mapper.FilmSceneMapper">
+    <insert id="addFilmScene">
+        INSERT INTO film_scene (
+            film_id,
+            cinema,
+            date,
+            begin_time,
+            cinema_type
+        )
+        VALUES
+            (
+                #{filmScene.film_id},
+                #{filmScene.cinema},
+                #{filmScene.date},
+                #{filmScene.begin_time},
+                #{filmScene.cinema_type}
+            )
+    </insert>
+    <select id="selectFilmScene" resultType="java.util.Map">
+        SELECT c.*,b.price
+        from film_scene c
+        JOIN film1 b on b.id=c.film_id
+        Where film_id=#{filmScene.film_id}
+          and cinema=#{filmScene.cinema}
+          and date=#{filmScene.date}
+          and begin_time=#{filmScene.begin_time}
+          and cinema_type=#{filmScene.cinema_type}
+    </select>
+</mapper>
