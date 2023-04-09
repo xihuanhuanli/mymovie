@@ -22,4 +22,10 @@ public class FilmSceneServiceImpl implements FilmSceneService {
         Map filmScene=filmSceneMapper.selectFilmScene(film);
         return filmScene;
     }
+
+    @Override
+    public Map<String, Object> getFilmInfoByFSID(Integer filmSceneId) {
+        Map<String,Object> map=filmSceneMapper.getFilmInfoByFSID(filmSceneId);
+        return map;
+    }
 }

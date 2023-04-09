@@ -8,4 +8,6 @@ public interface FilmSceneService {
     void addFilmScene(FilmScene film);
 
     Map selectFilmScene(FilmScene film);
+
+    Map<String, Object> getFilmInfoByFSID(Integer filmSceneId);
 }

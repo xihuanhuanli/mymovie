@@ -11,4 +11,7 @@ public interface FilmSceneMapper {
 
     @MapKey("film_id")
     Map selectFilmScene(@Param("filmScene")FilmScene film);
+
+    @MapKey("film_scene_id")
+    Map<String, Object> getFilmInfoByFSID(@Param("filmSceneId")Integer filmSceneId);
 }

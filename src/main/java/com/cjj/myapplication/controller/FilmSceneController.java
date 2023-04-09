@@ -1,5 +1,6 @@
 package com.cjj.myapplication.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.cjj.myapplication.api.FilmSceneAPI;
 import com.cjj.myapplication.common.ResponseData;
 import com.cjj.myapplication.model.FilmScene;
@@ -9,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 
@@ -38,5 +41,29 @@ public class FilmSceneController implements FilmSceneAPI {
             ResponseData responseData = new ResponseData<>(0, "success", map1);
             return responseData;
         }
+    }
+
+    @Override
+    public ResponseData getFilmInfoByFSID(FilmScene film) {
+        Map<String,Object> mapnew= filmSceneService.getFilmInfoByFSID(film.getFilm_scene_id());
+        Map map= (Map) mapnew.get(film.getFilm_scene_id());
+        String x=map.get("image_src").toString();
+        x="https://images.weserv.nl/?url="+x;
+        map.put("image_src",x);
+        if(map.get("seat")!=null){
+            String s= map.get("seat").toString();
+            String[] strings=s.split(",");
+            List<Map<String, Object>> statusFlowList = new ArrayList<>();
+            for (String s1:strings) {
+                JSONObject json1 = new JSONObject();
+                json1.put("x",s1.split("/")[0]);
+                json1.put("y",s1.split("/")[1]);
+                statusFlowList.add(json1);
+            }
+            map.put("seat",statusFlowList);
+        }
+
+        ResponseData responseData = new ResponseData<>(0, "success",map);
+        return responseData;
     }
 }

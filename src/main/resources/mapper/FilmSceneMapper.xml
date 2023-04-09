@@ -28,4 +28,11 @@
           and begin_time=#{filmScene.begin_time}
           and cinema_type=#{filmScene.cinema_type}
     </select>
+    <select id="getFilmInfoByFSID" resultType="java.util.Map">
+        SELECT c.* ,b.film_name,b.image_src,b.type,b.time,b.price,
+        (SELECT GROUP_CONCAT(seat.`row`,'/',seat.`column`)  from seat where seat.film_s_id = film_scene_id) as seat
+        FROM `film_scene` c
+        left JOIN film1 b on b.id=c.film_id
+        WHERE c.film_scene_id=#{filmSceneId}
+    </select>
 </mapper>

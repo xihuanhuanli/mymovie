@@ -12,4 +12,6 @@ public interface FilmSceneAPI {
     ResponseData addFilmScene(@RequestBody FilmScene film);
     @RequestMapping(value ="/selectFilmScene",method = RequestMethod.POST)
     ResponseData selectFilmScene(@RequestBody FilmScene film);
+    @RequestMapping(value = "/getFilmInfoByFSID",method = RequestMethod.POST)
+    ResponseData getFilmInfoByFSID(@RequestBody FilmScene film);
 }
