@@ -1,5 +1,6 @@
 package com.cjj.myapplication.api;
 
+import com.cjj.myapplication.api.dto.GetOrederModel;
 import com.cjj.myapplication.common.ResponseData;
 import com.cjj.myapplication.model.FilmScene;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,4 +15,7 @@ public interface FilmSceneAPI {
     ResponseData selectFilmScene(@RequestBody FilmScene film);
     @RequestMapping(value = "/getFilmInfoByFSID",method = RequestMethod.POST)
     ResponseData getFilmInfoByFSID(@RequestBody FilmScene film);
+
+    @RequestMapping(value = "/setOrder",method = RequestMethod.POST)
+    ResponseData setOrder(@RequestBody GetOrederModel getOrederModel);
 }

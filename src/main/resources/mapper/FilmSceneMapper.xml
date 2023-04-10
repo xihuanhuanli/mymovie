@@ -18,6 +18,33 @@
                 #{filmScene.cinema_type}
             )
     </insert>
+    <update id="updateFilmScene">
+        UPDATE film_scene
+        SET seat_number=#{seatNumber}
+        WHERE film_scene_id=#{filmSceneId}
+    </update>
+    <insert id="setOrder">
+        INSERT INTO `order` (
+            user_id,
+            film_scene_id,
+            amount,
+            orderdate,
+            order_number
+        )
+        VALUES
+            (
+                #{order.user_id},
+                #{order.film_scene_id},
+                #{order.amount},
+                #{order.orderdate},
+                #{order.order_number}
+            )
+    </insert>
+    <insert id="addSeat">
+        INSERT INTO `seat` ( `row`, `column`, film_s_id, ord_id )
+        VALUES
+            (#{seat.row},#{seat.column},#{seat.film_s_id},#{seat.ord_id} )
+    </insert>
     <select id="selectFilmScene" resultType="java.util.Map">
         SELECT c.*,b.price
         from film_scene c
@@ -34,5 +61,10 @@
         FROM `film_scene` c
         left JOIN film1 b on b.id=c.film_id
         WHERE c.film_scene_id=#{filmSceneId}
+    </select>
+    <select id="getOrderID" resultType="java.lang.Integer">
+        select order_id
+        FROM `order`
+        WHERE order_number=#{orderNum}
     </select>
 </mapper>
