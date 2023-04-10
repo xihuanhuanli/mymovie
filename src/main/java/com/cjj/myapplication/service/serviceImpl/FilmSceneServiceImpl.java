@@ -20,9 +20,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.annotation.Resource;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -58,7 +59,11 @@ public class FilmSceneServiceImpl implements FilmSceneService {
         order.setUser_id(getOrederModel.getUser_id());
         order.setFilm_scene_id(getOrederModel.getFilm_scene_id());
         order.setAmount(getOrederModel.getAmount());
-        order.setOrderdate(getOrederModel.getOrderdate());
+        //时区转换
+        ZonedDateTime zonedtime = getOrederModel.getOrderdate().atZone(ZoneId.from(ZoneOffset.UTC));
+        ZonedDateTime converted = zonedtime.withZoneSameInstant(ZoneOffset.ofHours(8));
+        LocalDateTime x=converted.toLocalDateTime();
+        order.setOrderdate(x);
         //生成ord_number
         String s="CM";
         s+="12138"+getOrederModel.getOrderdate().toString();
