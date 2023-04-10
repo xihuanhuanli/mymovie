@@ -20,4 +20,6 @@ public class PageRequest {
      * 查询输入框里的数据
      */
     private String search;
+
+    private int id;
 }

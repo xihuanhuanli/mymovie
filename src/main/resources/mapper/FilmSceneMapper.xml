@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.cjj.myapplication.mapper.FilmSceneMapper">
+    <resultMap id="OrderDTOMap" type="com.cjj.myapplication.api.dto.OrderDTO">
+        <id column="order_id" jdbcType="INTEGER" property="orderId"/>
+        <id column="ordseatnum" jdbcType="INTEGER" property="ordSeatNum"/>
+        <result column="film_name" jdbcType="VARCHAR" property="filmName"/>
+        <result column="image_src" jdbcType="VARCHAR" property="imageSrc"/>
+        <result column="cinema" jdbcType="VARCHAR" property="cinema"/>
+        <result column="cinema_type" jdbcType="VARCHAR" property="cinemaType"/>
+        <result column="begin_time" jdbcType="TIMESTAMP" property="beginTime"/>
+        <result column="orderdate" jdbcType="TIMESTAMP" property="orderDate"/>
+        <result column="seatinfo" jdbcType="VARCHAR" property="seatInfo"/>
+        <result column="order_number" jdbcType="VARCHAR" property="orderNumber"/>
+        <result column="amount" jdbcType="NUMERIC" property="amount"/>
+    </resultMap>
     <insert id="addFilmScene">
         INSERT INTO film_scene (
             film_id,
@@ -66,5 +79,39 @@
         select order_id
         FROM `order`
         WHERE order_number=#{orderNum}
+    </select>
+    <select id="selectOrderPage" resultMap="OrderDTOMap">
+        SELECT
+            c.order_id,
+            a.film_name,
+            a.image_src,
+            b.cinema,
+            b.cinema_type,
+            b.begin_time,
+            d.seatinfo,
+            c.amount,
+            c.orderdate,
+            c.order_number,
+            d.ordseatnum
+        FROM
+            `order` c
+                LEFT JOIN film_scene b ON b.film_scene_id = c.film_scene_id
+                LEFT JOIN film1 a ON a.id = b.film_id
+                LEFT JOIN (
+                SELECT
+                    GROUP_CONCAT( seat.`row`+1, '/', seat.`column`+1 ) AS seatinfo,
+                    ord_id,
+                    COUNT(*) AS ordseatnum
+                FROM
+                    seat
+                GROUP BY
+                    ord_id
+            ) d ON d.ord_id = c.order_id
+        WHERE
+            c.user_id =#{userid}
+        <if test="search!=null and search!=''">
+            AND a.film_name like   concat('%','${search}','%')
+        </if>
+
     </select>
 </mapper>

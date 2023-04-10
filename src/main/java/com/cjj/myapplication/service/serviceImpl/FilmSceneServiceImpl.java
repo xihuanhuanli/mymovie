@@ -1,11 +1,18 @@
 package com.cjj.myapplication.service.serviceImpl;
 
+import com.cjj.myapplication.api.dto.FilmDTO;
 import com.cjj.myapplication.api.dto.GetOrederModel;
+import com.cjj.myapplication.api.dto.OrderDTO;
+import com.cjj.myapplication.common.PageUtils.PageRequest;
+import com.cjj.myapplication.common.PageUtils.PageResult;
+import com.cjj.myapplication.common.PageUtils.PageUtils;
 import com.cjj.myapplication.mapper.FilmSceneMapper;
 import com.cjj.myapplication.model.FilmScene;
 import com.cjj.myapplication.model.Order;
 import com.cjj.myapplication.model.Seat;
 import com.cjj.myapplication.service.FilmSceneService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -75,5 +82,23 @@ public class FilmSceneServiceImpl implements FilmSceneService {
             logger.error(e.getMessage(), e);
             return false;
         }
+    }
+
+    @Override
+    public PageResult findOrderPage(PageRequest pageRequest) {
+        return PageUtils.getPageResult(pageRequest, getPageInfo(pageRequest));
+    }
+    private PageInfo getPageInfo(PageRequest pageRequest) {
+        int pageNum = pageRequest.getPageNum();
+        int pageSize = pageRequest.getPageSize();
+        PageHelper.startPage(pageNum, pageSize);
+        String  search=pageRequest.getSearch();
+        List<OrderDTO> orderList=filmSceneMapper.selectOrderPage(pageRequest.getId(),search);
+        for(OrderDTO orderDTO : orderList){
+            String s=orderDTO.getImageSrc();
+            s="https://images.weserv.nl/?url="+s;
+            orderDTO.setImageSrc(s);
+        }
+        return new PageInfo<OrderDTO>(orderList);
     }
 }

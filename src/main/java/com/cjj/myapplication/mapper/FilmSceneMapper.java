@@ -1,11 +1,13 @@
 package com.cjj.myapplication.mapper;
 
+import com.cjj.myapplication.api.dto.OrderDTO;
 import com.cjj.myapplication.model.FilmScene;
 import com.cjj.myapplication.model.Order;
 import com.cjj.myapplication.model.Seat;
 import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
 import java.util.Map;
 
 public interface FilmSceneMapper {
@@ -24,4 +26,6 @@ public interface FilmSceneMapper {
     int getOrderID(@Param("orderNum")String  orderNum);
 
     void addSeat(@Param("seat")Seat seat);
+
+    List<OrderDTO> selectOrderPage(@Param("userid")int parseInt,@Param("search")String search);
 }

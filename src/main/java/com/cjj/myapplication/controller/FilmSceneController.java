@@ -3,6 +3,9 @@ package com.cjj.myapplication.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.cjj.myapplication.api.FilmSceneAPI;
 import com.cjj.myapplication.api.dto.GetOrederModel;
+import com.cjj.myapplication.api.dto.UserDTO;
+import com.cjj.myapplication.common.PageUtils.PageRequest;
+import com.cjj.myapplication.common.PageUtils.PageResult;
 import com.cjj.myapplication.common.ResponseData;
 import com.cjj.myapplication.model.FilmScene;
 import com.cjj.myapplication.service.FilmSceneService;
@@ -77,5 +80,12 @@ public class FilmSceneController implements FilmSceneAPI {
         ResponseData responseData = new ResponseData<>(1, "write order not success");
         return responseData;
         }
+    }
+
+    @Override
+    public ResponseData selectOrder(PageRequest pageQuery) {
+        PageResult pageResult =filmSceneService.findOrderPage(pageQuery);
+        ResponseData responseData = new ResponseData<>(0, "success",pageResult);
+        return responseData;
     }
 }
