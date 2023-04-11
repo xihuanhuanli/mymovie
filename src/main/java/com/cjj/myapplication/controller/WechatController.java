@@ -123,7 +123,7 @@ public class WechatController implements WechatAPI {
                             .setSubject(user.getUsername())
                             .setIssuedAt(new Date())
                             .signWith(SignatureAlgorithm.HS256, salt).
-                            setExpiration(new Date(System.currentTimeMillis() + 300000));
+                            setExpiration(new Date(System.currentTimeMillis() + 1200000));
                     loginDTO.setToken(jwtBuilder.compact());
                     return new ResponseData<>(200, "success", loginDTO);
                 }else {

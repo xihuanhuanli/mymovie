@@ -88,7 +88,7 @@ public class UserController implements UserAPI {
                 .setSubject(userFromDB.getUsername())
                 .setIssuedAt(new Date())
                 .signWith(SignatureAlgorithm.HS256, salt).
-                setExpiration(new Date(System.currentTimeMillis() + 300000));
+                setExpiration(new Date(System.currentTimeMillis() + 1200000));
                 loginDTO.setToken(jwtBuilder.compact());
             return new ResponseData<>(200, "success", loginDTO);
         }
@@ -104,7 +104,7 @@ public class UserController implements UserAPI {
             Claims claims=null;
            try { claims = Jwts.parser().setSigningKey(salt).parseClaimsJws(token).getBody();
            }catch (Exception e){
-               return new ResponseData<>(401, "token过期", null);
+               return new ResponseData<>(401, "登录过期，请重新登录", null);
            }
             String userid = claims.getId();
             User user=userService.getUserInfoById(Integer.valueOf(userid));

@@ -19,4 +19,5 @@ public class OrderDTO {
     private LocalDateTime beginTime;
     private String orderNumber;
     private String imageSrc;
+    private String time;
 }

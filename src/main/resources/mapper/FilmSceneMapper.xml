@@ -12,6 +12,7 @@
         <result column="orderdate" jdbcType="TIMESTAMP" property="orderDate"/>
         <result column="seatinfo" jdbcType="VARCHAR" property="seatInfo"/>
         <result column="order_number" jdbcType="VARCHAR" property="orderNumber"/>
+        <result column="time" jdbcType="VARCHAR" property="time"/>
         <result column="amount" jdbcType="NUMERIC" property="amount"/>
     </resultMap>
     <insert id="addFilmScene">
@@ -84,6 +85,7 @@
         SELECT
             c.order_id,
             a.film_name,
+            a.time,
             a.image_src,
             b.cinema,
             b.cinema_type,
