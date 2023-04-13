@@ -51,9 +51,9 @@ public class FilmSceneController implements FilmSceneAPI {
     public ResponseData getFilmInfoByFSID(FilmScene film) {
         Map<String,Object> mapnew= filmSceneService.getFilmInfoByFSID(film.getFilm_scene_id());
         Map map= (Map) mapnew.get(film.getFilm_scene_id());
-        String x=map.get("image_src").toString();
-        x="https://images.weserv.nl/?url="+x;
-        map.put("image_src",x);
+//        String x=map.get("image_src").toString();
+//        x="https://images.weserv.nl/?url="+x;
+//        map.put("image_src",x);
         if(map.get("seat")!=null){
             String s= map.get("seat").toString();
             String[] strings=s.split(",");

@@ -14,7 +14,6 @@ public class User {
     private String wechatid;
     private String username;
     private String password;
-    private String email;
     private String avatar;
     private String role;
     private LocalDateTime createDate;

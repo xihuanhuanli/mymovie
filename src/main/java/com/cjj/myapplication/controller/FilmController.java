@@ -88,9 +88,9 @@ public class FilmController implements FilmAPI {
             ResponseData responseData=new ResponseData<>(1,"filmNOTExist!");
             return responseData;
         }
-        String s=film1.getImage_src();
-        s="https://images.weserv.nl/?url="+s;
-        film1.setImage_src(s);
+//        String s=film1.getImage_src();
+//        s="https://images.weserv.nl/?url="+s;
+//        film1.setImage_src(s);
         FilmDTO filmDTO=filmConverter.FilmToFilmDTO(film1);
         ResponseData responseData=new ResponseData<>(0,"success",filmDTO);
         return responseData;
@@ -131,11 +131,11 @@ public class FilmController implements FilmAPI {
     @Override
     public ResponseData selectShowFilm() {
         List<Map> map=filmService.selectShowFilm();
-        for(Map<String, Object> map1 : map){
-            String s=(String) map1.get("image_src");
-            s="https://images.weserv.nl/?url="+s;
-            map1.put("image_src",s);
-        }
+//        for(Map<String, Object> map1 : map){
+//            String s=(String) map1.get("image_src");
+//            s="https://images.weserv.nl/?url="+s;
+//            map1.put("image_src",s);
+//        }
         ResponseData responseData=new ResponseData(0,"success",map);
         return responseData;
     }

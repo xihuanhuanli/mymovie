@@ -80,11 +80,11 @@ public class FilmServiceImpl implements FilmService {
         PageHelper.startPage(pageNum, pageSize);
         String  search=pageRequest.getSearch();
         List<FilmDTO> filmList=filmMapper.selectPage(search);
-        for(FilmDTO film : filmList){
-            String s=film.getImageSrc();
-            s="https://images.weserv.nl/?url="+s;
-            film.setImageSrc(s);
-        }
+//        for(FilmDTO film : filmList){
+//            String s=film.getImageSrc();
+//            s="https://images.weserv.nl/?url="+s;
+//            film.setImageSrc(s);
+//        }
         return new PageInfo<FilmDTO>(filmList);
     }
 

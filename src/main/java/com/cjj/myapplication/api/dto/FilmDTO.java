@@ -20,6 +20,5 @@ public class FilmDTO {
     private String alias;
     private String language;
     private String time;
-    private String detailsSrc;
     private BigDecimal price;
 }

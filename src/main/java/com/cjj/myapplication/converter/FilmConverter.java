@@ -19,7 +19,6 @@ public interface FilmConverter {
             @Mapping(source = "releaseYear",target = "release_year"),
             @Mapping(source = "evaluateNumber",target = "evaluate_number"),
             @Mapping(source = "imageSrc",target = "image_src"),
-            @Mapping(source = "detailsSrc",target = "details_src")
     })
     Film FilmDTOToFilm(FilmDTO filmDTO);
 
@@ -29,7 +28,6 @@ public interface FilmConverter {
             @Mapping(source = "release_year",target = "releaseYear"),
             @Mapping(source = "evaluate_number",target = "evaluateNumber"),
             @Mapping(source = "image_src",target = "imageSrc"),
-            @Mapping(source = "details_src",target = "detailsSrc")
     })
     FilmDTO FilmToFilmDTO(Film film);
     @Mappings({
@@ -38,7 +36,6 @@ public interface FilmConverter {
             @Mapping(source = "release_year",target = "releaseYear"),
             @Mapping(source = "evaluate_number",target = "evaluateNumber"),
             @Mapping(source = "image_src",target = "imageSrc"),
-            @Mapping(source = "details_src",target = "detailsSrc")
     })
     List<FilmDTO> FilmListToFilmDTOList(List<Film> films);
 

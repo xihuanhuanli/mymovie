@@ -99,11 +99,11 @@ public class FilmSceneServiceImpl implements FilmSceneService {
         PageHelper.startPage(pageNum, pageSize);
         String  search=pageRequest.getSearch();
         List<OrderDTO> orderList=filmSceneMapper.selectOrderPage(pageRequest.getId(),search);
-        for(OrderDTO orderDTO : orderList){
-            String s=orderDTO.getImageSrc();
-            s="https://images.weserv.nl/?url="+s;
-            orderDTO.setImageSrc(s);
-        }
+//        for(OrderDTO orderDTO : orderList){
+//            String s=orderDTO.getImageSrc();
+//            s="https://images.weserv.nl/?url="+s;
+//            orderDTO.setImageSrc(s);
+//        }
         return new PageInfo<OrderDTO>(orderList);
     }
 }

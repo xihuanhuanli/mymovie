@@ -25,7 +25,6 @@ public class Film {
     private String alias;
     private String language;
     private String time;
-    private String details_src;
     private BigDecimal price;
     private LocalDateTime createDate;
     private int createBy;
