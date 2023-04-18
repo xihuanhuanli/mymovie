@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -100,6 +101,11 @@ public class FilmController implements FilmAPI {
     @Override
     public ResponseData addFilm(FilmDTO filmDTO) {
         Film film=filmConverter.FilmDTOToFilm(filmDTO);
+        int flag = film.getPrice().compareTo(BigDecimal.valueOf(99999999.99));
+        if(flag==1){
+                ResponseData responseData=new ResponseData<>(2,"Price overflow!");
+                return responseData;
+        }
         if(film.getFilm_name()!=null&&film.getFilm_name()!=""){
             Film filmtest=selectFilmByfilmName(film.getFilm_name());
             if(filmtest!=null){
