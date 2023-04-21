@@ -129,6 +129,18 @@ public class FilmController implements FilmAPI {
     @Override
     public ResponseData updateFilm(FilmDTO filmDTO) {
         Film film=filmConverter.FilmDTOToFilm(filmDTO);
+        int flag = film.getPrice().compareTo(BigDecimal.valueOf(99999999.99));
+        if(flag==1){
+            ResponseData responseData=new ResponseData<>(2,"Price overflow!");
+            return responseData;
+        }
+        if(film.getFilm_name()!=null&&film.getFilm_name()!=""){
+            Film filmtest=selectFilmByfilmName(film.getFilm_name());
+            if(filmtest!=null){
+                ResponseData responseData=new ResponseData<>(1,"filmExist!");
+                return responseData;
+            }
+        }
         filmService.updateFilm(film);
         ResponseData responseData=new ResponseData(0,"success");
         return responseData;
